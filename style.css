@@ -1,0 +1,239 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  overflow: hidden;
+  min-height: 100vh;
+  min-height: -webkit-fill-available; /* untuk iOS */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  height: -webkit-fill-available; /* untuk iOS */
+}
+
+.firework {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  animation: shoot 1s ease-out forwards;
+}
+
+@keyframes shoot {
+  0% {
+    transform: translateY(100vh);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(20vh);
+    opacity: 0;
+  }
+}
+
+.explosion {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(40);
+    opacity: 0;
+  }
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  animation: spread 1s ease-out forwards;
+}
+
+@keyframes spread {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y));
+    opacity: 0;
+  }
+}
+
+.birthday-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  padding: 0 20px;
+  opacity: 0;
+  animation: containerAppear 0.5s ease-out forwards;
+  animation-delay: 3s;
+}
+
+@keyframes containerAppear {
+  to {
+    opacity: 1;
+  }
+}
+
+.birthday-text {
+  display: inline-block;
+  font-family: "Arial", sans-serif;
+  color: transparent;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  position: relative;
+  /* Responsive font size */
+  font-size: min(8vw, 3em);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.birthday-text span {
+  display: inline-block;
+  animation: letterAppear 0.5s ease-out forwards, rainbow 4s linear infinite;
+  opacity: 0;
+  transform: translateY(50px) scale(0);
+  animation-delay: calc(var(--index) * 0.1s + 3s);
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.transition-button {
+  /* Initial state - invisible */
+  opacity: 0;
+
+  /* Button styling */
+  position: absolute;
+  padding: 10px 25px;
+  font-size: 14px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  background-color: rgba(87, 36, 168, 0.753);
+  color: rgb(196, 186, 186);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  text-decoration: none;
+  bottom: 10px;
+
+  /* Smooth transitions */
+  transition: all 0.3s ease-in-out;
+
+  /* Animation */
+  animation: fadeIn 0.5s ease-in-out forwards;
+  animation-delay: 3s; /* 3 second delay */
+}
+
+.transition-button:hover {
+  background-color: rgba(87, 36, 168, 0.753);
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgb(248, 247, 247);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes letterAppear {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+      0 0 20px var(--color), 0 0 35px var(--color), 0 0 40px var(--color),
+      0 0 50px var(--color), 0 0 75px var(--color);
+  }
+}
+
+@keyframes rainbow {
+  0%,
+  100% {
+    color: #ff0000;
+    --color: #ff0000;
+  }
+  25% {
+    color: #00ff00;
+    --color: #00ff00;
+  }
+  50% {
+    color: #0000ff;
+    --color: #0000ff;
+  }
+  75% {
+    color: #ff00ff;
+    --color: #ff00ff;
+  }
+}
+
+.emoji {
+  font-size: min(6vw, 1.5em);
+  display: inline-block;
+  animation: bounce 1s ease-in-out infinite;
+  margin: 0 2vw;
+  vertical-align: middle;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Orientasi landscape */
+@media (orientation: landscape) {
+  .birthday-text {
+    font-size: min(5vh, 3em);
+  }
+  .emoji {
+    font-size: min(4vh, 1.5em);
+  }
+}
+
+/* Perangkat dengan layar kecil */
+@media screen and (max-width: 320px) {
+  .birthday-text {
+    font-size: 7vw;
+  }
+  .emoji {
+    font-size: 5vw;
+    margin: 0 1vw;
+  }
+}
