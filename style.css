@@ -142,7 +142,7 @@ html {
   border-radius: 25px;
   cursor: pointer;
   text-decoration: none;
-  bottom: 5px;
+  bottom: 0px;
 
   /* Smooth transitions */
   transition: all 0.3s ease-in-out;
